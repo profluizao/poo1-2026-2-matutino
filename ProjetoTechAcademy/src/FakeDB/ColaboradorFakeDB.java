@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import Dominio.Colaborador;
 
-public class ColaboradorFakeDB extends AbsFakeDB{
+public class ColaboradorFakeDB extends AbsGenericFakeDB<Colaborador>{
 
     public ColaboradorFakeDB(){
         this.dados = new ArrayList<>();
