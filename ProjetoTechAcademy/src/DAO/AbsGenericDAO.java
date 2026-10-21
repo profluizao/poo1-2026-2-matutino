@@ -2,9 +2,17 @@ package DAO;
 
 import java.util.ArrayList;
 
+import FakeDB.AbsGenericFakeDB;
+
 public abstract class AbsGenericDAO<T> {
 
-    public abstract ArrayList<T> Browse();
+    protected AbsGenericFakeDB<T> repositorio;
+
+    protected ArrayList<T> tabela;
+
+    public ArrayList<T> Browse(){
+        return this.repositorio.getDados();
+    }
 
     public abstract T Read(int codigo);
 
@@ -14,4 +22,7 @@ public abstract class AbsGenericDAO<T> {
 
     public abstract T Delete(T apagado);
 
+    public AbsGenericDAO(){
+        
+    }
 }

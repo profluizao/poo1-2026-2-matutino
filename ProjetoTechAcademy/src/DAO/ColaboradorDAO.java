@@ -1,39 +1,52 @@
 package DAO;
 
-import java.util.ArrayList;
-
 import Dominio.Colaborador;
+import FakeDB.ColaboradorFakeDB;
 
 public class ColaboradorDAO extends AbsGenericDAO<Colaborador>{
 
     @Override
-    public ArrayList<Colaborador> Browse() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'Browse'");
-    }
-
-    @Override
     public Colaborador Read(int codigo) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'Read'");
+        for (Colaborador item : this.tabela) {
+            if (item.getCodigo() == codigo){
+                return item;
+            }
+        }
+        return null;
     }
 
     @Override
     public Colaborador Edit(Colaborador alterado) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'Edit'");
+        int codigoProcurado = alterado.getCodigo();
+        if (this.Read(codigoProcurado) != null){
+            int index = this.tabela.indexOf(alterado);
+            this.tabela.set(index, alterado);
+            return alterado;
+        }
+        return null;
     }
 
     @Override
     public Colaborador Add(Colaborador novo) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'Add'");
+        int ultimoCodigo = this.tabela.getLast().getCodigo();
+        int novoCodigo = ultimoCodigo + 1;
+        novo.setCodigo(novoCodigo);
+        this.tabela.add(novo);
+        return novo;
     }
 
     @Override
     public Colaborador Delete(Colaborador apagado) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'Delete'");
+        int codigoProcurado = apagado.getCodigo();
+        if (this.Read(codigoProcurado) != null){
+            this.tabela.remove(apagado);
+            return apagado;
+        }
+        return null;
     }
     
+    public ColaboradorDAO(){
+        this.repositorio = new ColaboradorFakeDB();
+        this.tabela = this.repositorio.getDados();
+    }
 }
