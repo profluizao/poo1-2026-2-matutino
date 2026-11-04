@@ -16,6 +16,7 @@ public abstract class AbsMenu {
         System.out.println("9 - Voltar");
         System.out.print("Selecione uma opção: ");
         int opcao = this.scan.nextInt();
+        this.scan.nextLine();
         return opcao;
     }    
 }
